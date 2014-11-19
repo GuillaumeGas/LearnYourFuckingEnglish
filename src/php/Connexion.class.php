@@ -32,7 +32,7 @@ class Connexion {
         if($l->connexion_ok()) {
             return Message::msg("Vous êtes connecté.", "home", $this->_smarty);
         } else if(!$l->donnees_envoyees()) {
-            return $this->_smarty->fetch("/html/connexion.html");
+            return $this->_smarty->fetch("html/connexion.html");
         } else {
             return Message::msg("Erreur lors de la connexion.", "connexion", $this->_smarty);
         }

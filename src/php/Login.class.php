@@ -6,9 +6,11 @@
  *
  * info :
  * utilisation de la session : $_SESSION["user"][" ici le nom du champ : ex : pseudo "]
- * 
+ *
  *
  */
+
+require_once("Log.class.php");
 
 
 class Login {

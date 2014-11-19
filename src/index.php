@@ -14,7 +14,7 @@ require_once("php/Home.class.php");
 require_once("php/Connexion.class.php");
 require_once("php/Content.class.php");
 require_once("php/Profil.class.php");
-require_once("php/Voc.class.php");
+//require_once("php/Voc.class.php");
 //require_once("php/IrregularVerbs.class.php");
 
 $smarty  = new Smarty();
