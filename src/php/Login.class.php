@@ -40,6 +40,7 @@ class Login {
 		$this->liste_champs_value = array();
 		$this->liste_champs_name = array();
 		$this->liste_champs_type = array();
+        $this->liste_champs_cryptes = array();
 		
 		$this->connec_ok = false;
 

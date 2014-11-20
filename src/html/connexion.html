@@ -9,7 +9,7 @@
                     <th colspan="2">CONNEXION</th>
                 </tr>
                 <tr>
-                    <td>Pseudo : </td><td><input type="text" name="pseudo"/></td>
+                    <td>Pseudo : </td><td><input type="text" name="nickname"/></td>
                 </tr>
                 <tr>
                     <td>Password : </td><td><input type="password" name="password"/></td>
@@ -17,6 +17,11 @@
                 <tr>
                     <th colspan="2"><input type="submit" value="Ok"/></th>
                 </tr>
+                {if $Error == "yes"}
+                <tr>
+                    <th colspan="2" style="color: red">Error</th>
+                </tr>
+                {/if}
                 <tr>
                     <td colspan="2" style="text-align: center"><a href="index.php?page=registration">Registration</a></td>
                 </tr>

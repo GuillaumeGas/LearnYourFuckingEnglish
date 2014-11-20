@@ -22,19 +22,22 @@ class Connexion {
      */
     public function get_contenu() {
         //objet permettant la connexion
-        $l = new Login("", "utilisateur", $this->_bdd, true);
-        $l->addChamp("Login", "Pseudo", "text");
-        $l->addChamp("Mdp", "Mdp", "password", true);
+        $l = new Login("", "users", $this->_bdd, true);
+        $l->addChamp("Nickname", "nickname", "text");
+        //$l->addChamp("Nickname", "Nickname", "password", true);
+        $l->addChamp("Password", "password", "password");
 
         $l->login();
 
         //si des données ont été envoyées...
         if($l->connexion_ok()) {
-            return Message::msg("Vous êtes connecté.", "home", $this->_smarty);
+            header("Location: index.php");
         } else if(!$l->donnees_envoyees()) {
+            $this->_smarty->assign("Error", "no");
             return $this->_smarty->fetch("html/connexion.html");
         } else {
-            return Message::msg("Erreur lors de la connexion.", "connexion", $this->_smarty);
+            $this->_smarty->assign("Error", "yes");
+            return $this->_smarty->fetch("html/connexion.html");
         }
     }
 
