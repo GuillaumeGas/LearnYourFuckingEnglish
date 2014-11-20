@@ -1,0 +1,27 @@
+<body>
+<head>
+    <title>LYFE :: Register</title>
+    <link href="css/bootstrap/css/bootstrap-darkly.css" rel="stylesheet"> <!-- mieux avec #666D64 en background de la sidebar -->
+    <link href="css/design.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+</head>
+<body>
+<div id="fullscreen_bg" class="fullscreen_bg"/>
+
+<div class="container">
+
+    <form class="form-signin" method="POST" action="index.php?page=register">
+        <h1 class="form-signin-heading text-muted">Register</h1>
+        <input type="text"  name="nickname" class="form-control" placeholder="Nickname" required="" autofocus="">
+        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+        <input type="password" name="password_verif" class="form-control" placeholder="Password verif" required="">
+        {if $Error == "yes"}<p class="err">An error occured ! This nickname is maybe already use.</p>{/if}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Register
+        </button>
+        <p class="register"><a href="index.php?page=login">Back to login</a></p>
+    </form>
+
+</div>
+</body>
+</body>

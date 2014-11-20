@@ -20,7 +20,7 @@ class Connexion {
      * @brief Renvoie les éléments à afficher en fonction du status de la connexion (formulaire, message de réussite ou d'échec..)
      * @return mixed
      */
-    public function get_contenu() {
+    public function get_content() {
         //objet permettant la connexion
         $l = new Login("", "users", $this->_bdd, true);
         $l->addChamp("Nickname", "nickname", "text");
@@ -34,9 +34,11 @@ class Connexion {
             header("Location: index.php");
         } else if(!$l->donnees_envoyees()) {
             $this->_smarty->assign("Error", "no");
+            $this->_smarty->assign("Registration", "no");
             return $this->_smarty->fetch("html/connexion.html");
         } else {
             $this->_smarty->assign("Error", "yes");
+            $this->_smarty->assign("Registration", "no");
             return $this->_smarty->fetch("html/connexion.html");
         }
     }

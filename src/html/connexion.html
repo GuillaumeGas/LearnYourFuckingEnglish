@@ -15,6 +15,11 @@
                 <input type="text"  name="nickname" class="form-control" placeholder="Nickname" required="" autofocus="">
                 <input type="password" name="password" class="form-control" placeholder="Password" required="">
                 {if $Error == "yes"}<p class="err">Error</p>{/if}
+                {if $Registration == "ok"}<p style="color: green;
+                                                    background-color: rgba(0, 0, 0, 0.32);
+                                                    height: 20px;
+                                                    text-align: center;
+                                                    border-radius: 4px;">Registration completed successfully</p>{/if}
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Sign In
                 </button>
