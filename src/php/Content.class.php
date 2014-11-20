@@ -9,8 +9,8 @@ require_once("php/Home.class.php");
 require_once("php/Connexion.class.php");
 require_once("php/Profil.class.php");
 require_once("php/Register.class.php");
-//require_once("php/Voc.class.php");
-//require_once("php/IrregularVerbs.class.php");
+require_once("php/Voc.class.php");
+require_once("php/IrregularVerbs.class.php");
 
 class Content {
 
@@ -40,7 +40,17 @@ class Content {
             }
         } else {
             switch($this->_page) {
-
+                case "voc":
+                    return $this->get_voc();
+                    break;
+                case "irr_verbs":
+                    return $this->get_irr_verbs();
+                    break;
+                case "logout":
+                    $this->logout();
+                    break;
+                default:
+                    return $this->get_home();
             }
         }
 
@@ -56,6 +66,28 @@ class Content {
     private function get_register() {
         $register = new Register($this->_bdd, $this->_smarty);
         return $register->get_content();
+    }
+
+    private function logout() {
+        session_destroy();
+        unset($_SESSION['user']);
+        unset($_SESSION['user_connected']);
+        header("Location: index.php");
+    }
+
+    private function get_home() {
+        $home = new Home($this->_bdd, $this->_smarty);
+        return $home->get_content();
+    }
+
+    private function get_voc() {
+        $voc = new Voc($this->_bdd, $this->_smarty);
+        return $voc->get_content();
+    }
+
+    private function get_irr_verbs() {
+        $irr_vb = new IrregularVerbs($this->_bdd, $this->_smarty);
+        return $irr_vb->get_content();
     }
 
 }
