@@ -24,8 +24,7 @@ class Connexion {
         //objet permettant la connexion
         $l = new Login("", "users", $this->_bdd, true);
         $l->addChamp("Nickname", "nickname", "text");
-        //$l->addChamp("Nickname", "Nickname", "password", true);
-        $l->addChamp("Password", "password", "password");
+        $l->addChamp("Password", "password", "password", true);
 
         $l->login();
 
