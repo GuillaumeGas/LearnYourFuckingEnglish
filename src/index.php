@@ -26,6 +26,7 @@ if(isset($_GET['page'])) {
 $content = new Content($bdd, $smarty, $page);
 $content_page = $content->get_content();
 
+$smarty->assign("Page", $page);
 $smarty->assign("Content", $content_page);
 
 header('Content-Type: text/html; charset=utf-8');
