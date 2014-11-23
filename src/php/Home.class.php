@@ -12,7 +12,7 @@ class Home {
     }
 
     public function get_content() {
-
+        return $this->_smarty->fetch("html/home.html");
     }
 
 

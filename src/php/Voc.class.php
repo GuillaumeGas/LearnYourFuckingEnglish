@@ -21,7 +21,7 @@ class Voc {
                 return Message::msg("Error. Bad opt.", "voc", $this->_smarty);
             }
         } else {
-            if(isset($_GET['words_posted'])) {
+            if(isset($_POST['words_posted'])) {
                 return $this->check_test();
             } else {
                 return $this->show_test_form();
@@ -86,6 +86,7 @@ class Voc {
         $nb_voc = 0;
         while($data = $query_1->fetch()) {
             $voc[$nb_voc] = $data;
+            $voc[$nb_voc]['num'] = $nb_voc;
             $voc[$nb_voc++]['success'] = 0;
         }
 
@@ -104,7 +105,9 @@ class Voc {
         $i = 0;
         while($i < $nb_already_read && $nb_word_already_know < 5) {
             if($tmp_voc[$i]['success'] >= 80) {
-                $voc[$nb_voc++] = $tmp_voc[$i];
+                $voc[$nb_voc] = $tmp_voc[$i];
+                $voc[$nb_voc]['num'] = $nb_voc;
+                $nb_voc++;
                 $nb_word_already_know++;
             }
             $i++;
@@ -113,7 +116,9 @@ class Voc {
         $i = 0;
         while($nb_voc < 20 && $i < $nb_already_read) {
             if($tmp_voc[$i]['success'] < 80) {
-                $voc[$nb_voc++] = $tmp_voc[$i];
+                $voc[$nb_voc] = $tmp_voc[$i];
+                $voc[$nb_voc]['num'] = $nb_voc;
+                $nb_voc++;
             }
             $i++;
         }

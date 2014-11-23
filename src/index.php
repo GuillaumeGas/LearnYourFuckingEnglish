@@ -28,6 +28,7 @@ $content_page = $content->get_content();
 
 $smarty->assign("Content", $content_page);
 
+header('Content-Type: text/html; charset=utf-8');
 //affichage de la page
 $smarty->display("html/index.html");
 

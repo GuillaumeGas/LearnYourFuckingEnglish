@@ -1,11 +1,35 @@
+<div class="row">
+{if $Lang == "french"}
+    <a href="index.php?page=voc&lang=french">Refresh</a> -
+    <a href="index.php?page=voc&lang=english">Switch to english</a>
+{else}
+    <a href="index.php?page=voc&lang=english">Refresh</a> -
+    <a href="index.php?page=voc&lang=french">Switch to french</a>
+{/if}
+<br>
 {if $ShowResult == "true"}
     <p>{$Err}<br>{$NbErr} error(s).</p>
-
-    {if $Lang == "french"}
-        <a href="index.php?page=voc&lang=french">Refresh</a>
-    {else}
-        <a href="index.php?page=voc&lang=english">Refresh</a>
-    {/if}
 {else}
-
+    <form method="POST" action="index.php?page=voc">
+    <table class="table table-bordered table-striped table-condensed">
+        {foreach from=$ListVoc item=word}
+            <tr>
+                {if $Lang == "french"}
+                    <td><input type="hidden" name="origin_{$word.num}" value="{$word.french}" />{$word.french}</td>
+                    <td><input type="text" name="translate_{$word.num}"/><input type="hidden" name="correct_translate_{$word.num}" value="{$word.english}"/></td>
+                {else}
+                    <td><input type="hidden" name="origin_{$word.num}" value="{$word.english}" />{$word.english}</td>
+                    <td><input type="text" name="translate_{$word.num}"/><input type="hidden" name="correct_translate_{$word.num}" value="{$word.french}"/></td>
+                {/if}
+                <td>{$word.success}%</td>
+                <input type="hidden" name="id_{$word.num}" value="{$word.id}"/>
+            </tr>
+        {/foreach}
+        <tr><td colspan="3" style="text-align: center;"><input type="submit" value="Submit"/></td></tr>
+    </table>
+        <input type="hidden" name="words_posted" value="yes"/>
+        <input type="hidden" name="nb_vb" value="{$NbVoc}"/>
+        <input type="hidden" name="lang" value="{$Lang}"/>
+    </form>
 {/if}
+</div>
