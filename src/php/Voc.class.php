@@ -11,8 +11,8 @@ class Voc {
 
     public function get_content() {
         if(isset($_GET['opt'])) {
-            if($_GET['opt'] == "add_xords") {
-                if(isset($_GET['words_posted'])) {
+            if($_GET['opt'] == "add_words") {
+                if(isset($_POST['words_posted'])) {
                     return $this->save_words();
                 } else {
                     return $this->print_add_form();

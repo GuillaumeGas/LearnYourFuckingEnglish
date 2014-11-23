@@ -1,11 +1,12 @@
 <div class="row">
 {if $Lang == "french"}
     <a href="index.php?page=voc&lang=french" style="text-decoration: underline;">Refresh</a> -
-    <a href="index.php?page=voc&lang=english" style="text-decoration: underline;">Switch to english</a>
+    <a href="index.php?page=voc&lang=english" style="text-decoration: underline;">Switch to english</a> -
 {else}
     <a href="index.php?page=voc&lang=english" style="text-decoration: underline;">Refresh</a> -
-    <a href="index.php?page=voc&lang=french" style="text-decoration: underline;">Switch to french</a>
+    <a href="index.php?page=voc&lang=french" style="text-decoration: underline;">Switch to french</a> -
 {/if}
+    <a href="index.php?page=voc&opt=add_words" style="text-decoration: underline;">Add new words</a>
 <br>
 {if $ShowResult == "true"}
     <p>{$Err}<br>{$NbErr} error(s).</p>

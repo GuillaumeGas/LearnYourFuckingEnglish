@@ -1,0 +1,17 @@
+<form method="POST" action="index.php?page=voc&opt=add_words">
+    <table align="center" class="table table-bordered table-striped table-condensed">
+        <tr>
+            <th class="th">English</th>
+            <th class="th">French</th>
+        </tr>
+        {for $i=0 to 10}
+        <tr>
+            <td><input type="text" name="english_{$i}"/></td>
+            <td><input type="text" name="french_{$i}"/></td>
+        </tr>
+        {/for}
+        <tr><th colspan="4" style="text-align:center;"><input type="submit" value="ok"/></th></tr>
+        </table>
+
+    <input type="hidden" name="words_posted" value="true"/>
+</form>

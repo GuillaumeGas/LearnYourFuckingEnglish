@@ -10,8 +10,6 @@
  *
  */
 
-require_once("Log.class.php");
-
 
 class Login {
     private $bdd; //stocke un objet PDO
@@ -25,12 +23,9 @@ class Login {
     private $liste_champs_cryptes;
 	
 	private $connec_ok; //boolean pour savoir si la connexion a été faite
-    private $log;
-    private $utiliser_log;
 
-	public function __construct($p_fichier_action, $p_table, $p_bdd = null, $p_log = false, $p_path_log = "login.log") {
-        $this->log = new Log($p_path_log);
-        $this->utiliser_log = $p_log;
+	public function __construct($p_fichier_action, $p_table, $p_bdd = null) {
+
 
 		$this->bdd = $p_bdd;
         $this->table = $p_table;
@@ -46,7 +41,6 @@ class Login {
 
         if(session_id() == "") {
             session_start();
-            $this->log->add_info_log("Activation des sessions");
         }
 
         if(isset($_SESSION['user_connected'])) {
@@ -55,46 +49,26 @@ class Login {
             }
         }
 
-        $this->log->write_log();
-	}
+     }
 
     public function __destruct() {
-        if($this->utiliser_log == false) {
-            $this->log->close();
-            $this->log->delete_file();
-        }
+
     }
 
-    /**
-     * @brief Permet d'activer ou non l'utilisation du fichier de log (false par défaut)
-     * @param $val (true pour activier sinon false)
-     */
-    public function set_log($val) {
-        $this->utiliser_log = $val;
-        $this->log->write_info_log("Activation du fichier de log");
-    }
-
-    public function show_log_messages($val) {
-        $this->log->set_show_err($val);
-        $this->log->set_show_info($val);
-    }
 
 	public function logout() {
 		unset($_SESSION['user']);
         unset($_SESSION['user_connected']);
-        $this->log->write_info_log("Deconnexion de l'utilisateur. (".$_SERVER['REMOTE_ADDR'].")");
-	}
+   	}
 
     public function connect_db($p_host, $p_login, $p_mdp, $p_base) {
         try {
             $this->bdd = new PDO('mysql:host='.$p_host.';dbname='.$p_base, $p_login, $p_mdp);
-            $this->log->add_info_log("Connexion à la base de donnees effectuee.");
         } catch(PDOException $e) {
-            $this->log->add_err_log("Erreur lors de la connexion à la base de données.");
+            echo "Erreur connexion.";
         }
 
-        $this->log->write_log();
-    }
+   }
 
 	//fonction permettant de rajouter des champs (param : value, le nom du champs et son type (text, password...)
 	public function addChamp($p_value, $p_name, $p_type, $p_md5 = false) {
@@ -147,28 +121,23 @@ class Login {
                         $_SESSION['user_connected'] = true;
                         $this->connec_ok = true; //on indique que la connexion est établie
 
-                        $this->log->write_info_log("Connexion de l'utilisateur effectuee. (".$_SERVER['REMOTE_ADDR'] .")");
 
                         return true;
                     } else {
-                        $this->log->add_err_log("Erreur lors de la connexion ! (".$_SERVER['REMOTE_ADDR'] .")");
+                        echo "Erreur lors de la connexion ! (".$_SERVER['REMOTE_ADDR'] .")";
                     }
                 } else {
-                    $this->log->add_err_log("Erreur dans la requete ! (".$_SERVER['REMOTE_ADDR'] .")");
+                    echo("Erreur dans la requete ! (".$_SERVER['REMOTE_ADDR'] .")");
                 }
             }
-            $this->log->write_log();
             return false;
         } else if($this->bdd == null) {
-            $this->log->add_err_log("Erreur, base de données non connectée.");
-            $this->log->write_log();
-            return false;
+            echo("Erreur, base de données non connectée.");
+           return false;
         } else {
-            $this->log->write_log();
-            return true;
+           return true;
         }
-        $this->log->write_log();
-	}
+   	}
 
     public function donnees_envoyees() {
         $champs_ok = true; //on suppose que les champs ont été remplis
@@ -181,7 +150,6 @@ class Login {
     }
 
     public function generer_formulaire() {
-        $this->log->add_info_log("Génération du formulaire de connexion.");
         //affichage du formulaire
         echo '<form action="'.$this->fichier_action.'", method="POST">';
         echo '<table>';
@@ -192,7 +160,6 @@ class Login {
         echo '</form>';
         echo '</form>';
 
-        $this->log->write_log();
     }
 
 	//fonction permettant de vérifier si la connexion a été établie
